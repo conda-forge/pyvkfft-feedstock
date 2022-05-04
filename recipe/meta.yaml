@@ -19,7 +19,7 @@ build:
   script:
     - set "CC="    # [win]
     - set "CXX="   # [win]
-    - {{ PYTHON }} -m pip install . -vv
+    - {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
   ignore_run_exports_from:
     - {{ compiler('cuda') }}
 
