@@ -12,13 +12,13 @@ source:
     - conda_libraries.diff
 
 build:
-  number: 1
+  number: 2
   entry_points:
     - pyvkfft-test = pyvkfft.scripts.pyvkfft_test:main
   script:
-    - export VKFFT_BACKEND=opencl  # [unix]
-    - set VKFFT_BACKEND=opencl     # [win]
     - {{ PYTHON }} -m pip install . -vv
+  ignore_run_exports_from:
+    - {{ compiler('cuda') }}
 
 requirements:
   build:
@@ -26,6 +26,7 @@ requirements:
     - cross-python_{{ target_platform }}     # [build_platform != target_platform]
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
+    - {{ compiler('cuda') }}
   host:
     - pip
     - python
@@ -36,6 +37,11 @@ requirements:
     - psutil
     - pyopencl
     - python
+    - __cuda =={{ cuda_compiler_version }}  # [cuda_compiler_version in ('10.2', '11.0', '11.1')]
+    - __cuda >={{ cuda_compiler_version }},<12  # [cuda_compiler_version == '11.2']
+  run_constrained:
+    - cudatoolkit =={{ cuda_compiler_version }}  # [cuda_compiler_version in ('10.2', '11.0', '11.1')]
+    - cudatoolkit >={{ cuda_compiler_version }},<12  # [cuda_compiler_version == '11.2']
 
 test:
   imports:
