@@ -10,6 +10,7 @@ source:
   sha256: d283542c14e5a0fac15d91018b8390dce397b3e02fc9c43a16cd799886801d45
   patches:
     - conda_libraries.diff
+    - ccbin.diff
 
 build:
   number: 2
