@@ -1,0 +1,14 @@
+diff --git a/setup.py b/setup.py
+index d63343b..8750e6a 100644
+--- a/setup.py
++++ b/setup.py
+@@ -49,7 +49,9 @@ def locate_cuda():
+             home = os.path.dirname(os.path.dirname(nvcc))
+         libdir = pjoin(home, 'lib', 'x64')
+         extra_compile_args = ['-O3', '--ptxas-options=-v', '-Xcompiler', '/MD']
++        extra_compile_args = ["--use-local-env", "-ccbin", os.path.dirname(find_in_path('cl.exe', os.environ['PATH']))] + extra_compile_args
+         extra_link_args = ['-L%s' % libdir]
++        extra_link_args = ["--use-local-env", "-ccbin", os.path.dirname(find_in_path('cl.exe', os.environ['PATH']))] + extra_link_args
+     else:
+         # First check if the CUDAHOME env variable is in use
+         if 'CUDAHOME' in os.environ:
