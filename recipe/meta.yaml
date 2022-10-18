@@ -17,8 +17,6 @@ build:
   entry_points:
     - pyvkfft-test = pyvkfft.scripts.pyvkfft_test:main
   script:
-    - set "CC="    # [win]
-    - set "CXX="   # [win]
     - {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
   ignore_run_exports_from:
     - {{ compiler('cuda') }}
