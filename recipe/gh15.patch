@@ -1,11 +1,8 @@
-From d2c1fe91e45682fe34b05b78cd049a980b6f718b Mon Sep 17 00:00:00 2001
-From: Isuru Fernando <isuruf@gmail.com>
-Date: Sun, 20 Mar 2022 04:38:10 -0700
-Subject: [PATCH] Use EXT_SUFFIX instead of deprecated SO (#15)
+commit ec5fd75f7a37ceb0825c020c3e43de9dfcd60174
+Author: Isuru Fernando <isuruf@gmail.com>
+Date:   Sun Mar 20 04:38:10 2022 -0700
 
----
- pyvkfft/base.py | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+    Use EXT_SUFFIX instead of deprecated SO (#15)
 
 diff --git a/pyvkfft/base.py b/pyvkfft/base.py
 index b28fa44..dfefabc 100644
