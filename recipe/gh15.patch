@@ -1,0 +1,19 @@
+commit ec5fd75f7a37ceb0825c020c3e43de9dfcd60174
+Author: Isuru Fernando <isuruf@gmail.com>
+Date:   Sun Mar 20 04:38:10 2022 -0700
+
+    Use EXT_SUFFIX instead of deprecated SO (#15)
+
+diff --git a/pyvkfft/base.py b/pyvkfft/base.py
+index b28fa44..dfefabc 100644
+--- a/pyvkfft/base.py
++++ b/pyvkfft/base.py
+@@ -113,7 +113,7 @@ def load_library(basename):
+         # We patched build_ext so the module is a .so and not a dll
+         ext = '.so'
+     else:
+-        ext = sysconfig.get_config_var('SO')
++        ext = sysconfig.get_config_var('EXT_SUFFIX')
+     return ctypes.cdll.LoadLibrary(os.path.join(os.path.dirname(__file__) or os.path.curdir, basename + ext))
+ 
+ 
