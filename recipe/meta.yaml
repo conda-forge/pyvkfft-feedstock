@@ -11,7 +11,7 @@ source:
   patches:
     - conda_libraries.diff
     - ccbin.diff
-    - gh15.diff
+    - gh15.patch
 
 build:
   number: 3
