@@ -14,7 +14,7 @@ source:
     - gh15.patch
 
 build:
-  number: 3
+  number: 4
   entry_points:
     - pyvkfft-test = pyvkfft.scripts.pyvkfft_test:main
   script:
