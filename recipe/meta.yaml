@@ -30,6 +30,7 @@ requirements:
     - {{ compiler('cxx') }}
     - {{ compiler('cuda') }}                 # [cuda_compiler_version != "None"]
   host:
+    - cuda-nvrtc-dev      # [(cuda_compiler_version or "").startswith("12")]
     - pip
     - python
     - ocl-icd  # [linux]
