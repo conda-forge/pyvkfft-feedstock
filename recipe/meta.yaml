@@ -14,7 +14,7 @@ source:
     - gh15.patch
 
 build:
-  number: 4
+  number: 5
   entry_points:
     - pyvkfft-test = pyvkfft.scripts.pyvkfft_test:main
   script:
@@ -30,6 +30,7 @@ requirements:
     - {{ compiler('cxx') }}
     - {{ compiler('cuda') }}                 # [cuda_compiler_version != "None"]
   host:
+    - cuda-nvrtc-dev      # [(cuda_compiler_version or "").startswith("12")]
     - pip
     - python
     - ocl-icd  # [linux]
