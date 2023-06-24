@@ -632,4 +632,5 @@ Feedstock Maintainers
 =====================
 
 * [@isuruf](https://github.com/isuruf/)
+* [@vincefn](https://github.com/vincefn/)
 
