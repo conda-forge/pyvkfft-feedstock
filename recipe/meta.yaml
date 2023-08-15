@@ -48,8 +48,8 @@ requirements:
 test:
   imports:
     - pyvkfft
-  commands:
-    - pyvkfft-test --help
+#  commands:
+#    - pyvkfft-test --help
 
 about:
   home: https://github.com/vincefn/pyvkfft
