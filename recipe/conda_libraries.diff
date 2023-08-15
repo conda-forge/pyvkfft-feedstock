@@ -1,8 +1,8 @@
---- setup.py.bak	2022-03-23 21:42:07.212278572 -0500
-+++ setup.py	2022-03-23 21:46:08.367799027 -0500
-@@ -90,21 +90,15 @@
-     library_dirs = []
-     extra_compile_args = ['-std=c++11', '-Wno-format-security']
+--- setup.py.bak	2023-08-15 09:41:46.000000000 +0200
++++ setup.py	2023-08-15 09:42:46.000000000 +0200
+@@ -108,23 +108,15 @@
+     extra_compile_args = ['-std=c++11', '-Wno-format-security',
+                           f'-DVKFFT_MAX_FFT_DIMENSIONS={VKFFT_MAX_FFT_DIMENSIONS}']
      extra_link_args = None
 -    if platform.system() == 'Darwin':
 -        libraries = None
@@ -14,13 +14,15 @@
 -            if path in os.environ:
 -                include_dirs.append(pjoin(os.environ[path], 'include'))
 -                library_dirs.append(pjoin(os.environ[path], 'lib', 'x64'))
+-        library_dirs.append(pjoin(os.path.dirname(find_in_path('cl.exe', os.environ['PATH'])).split('bin')[0],
+-                                  'lib', 'x64'))
 +        include_dirs.append(os.environ["LIBRARY_INC"])
 +        library_dirs.append(os.environ["LIBRARY_LIB"])
          libraries = ['OpenCL']
-         extra_compile_args = None
+         extra_compile_args = [f'/DVKFFT_MAX_FFT_DIMENSIONS={VKFFT_MAX_FFT_DIMENSIONS}']
      else:
 -        # Linux
-+        # Linux and OSX
++        # Linux and macOS
          libraries = ['OpenCL']
 -        extra_link_args = ['--shared']
  
