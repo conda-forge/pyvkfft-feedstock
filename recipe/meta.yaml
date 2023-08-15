@@ -10,7 +10,6 @@ source:
   sha256: 090132fa3e94d88dbda5cf4585f83b1c98a45850d64f34652b7e80e86145893b
   patches:
     - conda_libraries.diff
-    - ccbin.diff
 
 build:
   number: 0
@@ -34,6 +33,7 @@ requirements:
     - python
     - ocl-icd  # [linux]
     - khronos-opencl-icd-loader  # [win or osx]
+    - ocl_icd_wrapper_apple  # [osx]
   run:
     - numpy
     - psutil
