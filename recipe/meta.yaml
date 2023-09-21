@@ -1,5 +1,5 @@
 {% set name = "pyvkfft" %}
-{% set version = "2023.2" %}
+{% set version = "2023.2.post1" %}
 
 package:
   name: {{ name|lower }}
@@ -7,12 +7,12 @@ package:
 
 source:
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/pyvkfft-{{ version }}.tar.gz
-  sha256: 090132fa3e94d88dbda5cf4585f83b1c98a45850d64f34652b7e80e86145893b
+  sha256: e518e43866fd1dd7d089af859bd69373c5c56312aca0d5befd97fc37c80120db
   patches:
     - conda_libraries.diff
 
 build:
-  number: 1
+  number: 0
   entry_points:
     - pyvkfft-test = pyvkfft.scripts.pyvkfft_test:main
   script:
