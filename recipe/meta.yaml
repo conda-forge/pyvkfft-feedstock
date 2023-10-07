@@ -16,7 +16,7 @@ source:
     - conda_libraries.diff
 
 build:
-  number: 2
+  number: 3
   entry_points:
     - pyvkfft-test = pyvkfft.scripts.pyvkfft_test:main
   script:
