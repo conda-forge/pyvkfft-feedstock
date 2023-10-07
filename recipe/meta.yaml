@@ -1,5 +1,9 @@
 {% set name = "pyvkfft" %}
 {% set version = "2023.2" %}
+{% if cuda_compiler_version is undefined %}
+{% set cuda_compiler_version = "None" %}
+{% endif %}
+{% set cuda_major_p1 = 0 if cuda_compiler_version == "None" else cuda_compiler_version|int + 1 %}
 
 package:
   name: {{ name|lower }}
@@ -41,12 +45,12 @@ requirements:
     - python
     - __cuda =={{ cuda_compiler_version }}  # [cuda_compiler_version in ('10.2', '11.0', '11.1')]
     - __cuda >={{ cuda_compiler_version }},<12  # [cuda_compiler_version == '11.2']
-    - __cuda >={{ cuda_compiler_version }},{{ cuda_compiler_version|int + 1 }}  # [cuda_compiler_version not in ('10.2', '11.0', '11.1', '11.2')]
+    - __cuda >={{ cuda_compiler_version }},{{ cuda_major_p1 }}  # [cuda_compiler_version not in ('10.2', '11.0', '11.1', '11.2')]
   run_constrained:
     - __cuda <0.0a0  # [cuda_compiler_version == "None"]
     - cudatoolkit =={{ cuda_compiler_version }}  # [cuda_compiler_version in ('10.2', '11.0', '11.1')]
     - cudatoolkit >={{ cuda_compiler_version }},<12  # [cuda_compiler_version == '11.2']
-    - cudatoolkit >={{ cuda_compiler_version }},{{ cuda_compiler_version|int + 1 }}  # [cuda_compiler_version not in ('10.2', '11.0', '11.1', '11.2')]
+    - cudatoolkit >={{ cuda_compiler_version }},{{ cuda_major_p1 }}  # [cuda_compiler_version not in ('10.2', '11.0', '11.1', '11.2')]
 
 test:
   imports:
