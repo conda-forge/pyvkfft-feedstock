@@ -43,12 +43,7 @@ requirements:
     - psutil
     - pyopencl
     - python
-    - __cuda =={{ cuda_compiler_version }}  # [cuda_compiler_version in ('10.2', '11.0', '11.1')]
-    - __cuda >={{ cuda_compiler_version }},<11.8  # [cuda_compiler_version == '11.2']
-    - __cuda >={{ cuda_compiler_version }},<12  # [cuda_compiler_version == '11.8']
-    {% if cuda_major >=12 %}
-    - __cuda >={{ cuda_compiler_version }},<{{ cuda_major + 1 }}.0a0
-    {% endif %}
+    - __cuda >={{ cuda_compiler_version }}  # [cuda_compiler_version != "None"]
   run_constrained:
     - __cuda <0.0a0  # [cuda_compiler_version == "None"]
     - cudatoolkit =={{ cuda_compiler_version }}  # [cuda_compiler_version in ('10.2', '11.0', '11.1')]
