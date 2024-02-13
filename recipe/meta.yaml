@@ -1,5 +1,5 @@
 {% set name = "pyvkfft" %}
-{% set version = "2023.2" %}
+{% set version = "2024.1.1" %}
 {% if cuda_compiler_version is undefined %}
 {% set cuda_compiler_version = "None" %}
 {% endif %}
@@ -11,12 +11,12 @@ package:
 
 source:
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/pyvkfft-{{ version }}.tar.gz
-  sha256: 090132fa3e94d88dbda5cf4585f83b1c98a45850d64f34652b7e80e86145893b
+  sha256: 71581507a9402e2f9552cf31f10827d47e59879bfdc088ee73a11700b4e75c53
   patches:
     - conda_libraries.diff
 
 build:
-  number: 6
+  number: 0
   entry_points:
     - pyvkfft-test = pyvkfft.scripts.pyvkfft_test:main
   script:
@@ -24,12 +24,14 @@ build:
   ignore_run_exports_from:
     - {{ compiler('cuda') }}
 
+# TODO: why is gxx needed in addition of compiler{cxx} ? Otherwise cuda fails to find gcc ?
 requirements:
   build:
     - python                                 # [build_platform != target_platform]
     - cross-python_{{ target_platform }}     # [build_platform != target_platform]
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
+    - gxx  # [linux]
     - {{ compiler('cuda') }}                 # [cuda_compiler_version != "None"]
   host:
     - cuda-nvrtc-dev      # [(cuda_compiler_version or "").startswith("12")]
