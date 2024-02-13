@@ -24,12 +24,14 @@ build:
   ignore_run_exports_from:
     - {{ compiler('cuda') }}
 
+# TODO: why is gxx needed in addition of compiler{cxx} ? Otherwise cuda fails to find gcc ?
 requirements:
   build:
     - python                                 # [build_platform != target_platform]
     - cross-python_{{ target_platform }}     # [build_platform != target_platform]
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
+    - gxx  # [linux]
     - {{ compiler('cuda') }}                 # [cuda_compiler_version != "None"]
   host:
     - cuda-nvrtc-dev      # [(cuda_compiler_version or "").startswith("12")]
