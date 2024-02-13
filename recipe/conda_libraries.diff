@@ -1,6 +1,15 @@
---- setup.py.bak	2023-08-15 09:41:46.000000000 +0200
-+++ setup.py	2023-08-15 09:42:46.000000000 +0200
-@@ -108,23 +108,15 @@
+--- setup.py.bak	2024-02-13 21:00:52
++++ setup.py	2024-02-13 21:01:18
+@@ -49,7 +49,7 @@
+     # search for nvcc
+     app_name = 'nvcc.exe' if platform.system() == "Windows" else 'nvcc'
+     nvcc, home = None, None
+-    for p in ['CUDA_PATH', 'CUDA_HOME', 'CUDAHOME']:
++    for p in ['CUDA_PATH', 'CUDA_HOME', 'CUDAHOME', 'BUILD_PREFIX', 'PREFIX']:
+         if p in os.environ:
+             if os.path.exists(pjoin(os.environ[p], 'bin', app_name)):
+                 nvcc = pjoin(os.environ[p], 'bin', app_name)
+@@ -105,23 +105,15 @@
      extra_compile_args = ['-std=c++11', '-Wno-format-security',
                            f'-DVKFFT_MAX_FFT_DIMENSIONS={VKFFT_MAX_FFT_DIMENSIONS}']
      extra_link_args = None
@@ -26,5 +35,5 @@
          libraries = ['OpenCL']
 -        extra_link_args = ['--shared']
  
-     opencl_config = {'libraries': libraries, 'extra_link_args': extra_link_args,
-                      'include_dirs': include_dirs, 'library_dirs': library_dirs,
+     if 'CONDA_PREFIX' in os.environ:
+         include_dirs.append(f"{os.environ['CONDA_PREFIX']}/include")
