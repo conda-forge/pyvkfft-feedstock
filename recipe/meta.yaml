@@ -33,7 +33,6 @@ requirements:
     - {{ compiler('cxx') }}
     - gxx                                    # [linux]
     - {{ compiler('cuda') }}                 # [cuda_compiler_version != "None"]
-    - cuda-nvrtc-dev                         # [(cuda_compiler_version or "").startswith("12")]
   host:
     - pip
     - python
@@ -41,6 +40,7 @@ requirements:
     - khronos-opencl-icd-loader             # [win or osx]
     - ocl_icd_wrapper_apple                 # [osx]
     - cuda-version >={{ cuda_compiler_version }},<{{ cuda_major + 1 }}.0a0  # [cuda_compiler_version != "None"]
+    - cuda-nvrtc-dev                         # [(cuda_compiler_version or "").startswith("12")]
   run:
     - numpy
     - psutil
