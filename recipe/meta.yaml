@@ -24,40 +24,40 @@ build:
   ignore_run_exports_from:
     - {{ compiler('cuda') }}
 
-# TODO: why is gxx needed in addition of compiler{cxx} ? Otherwise cuda fails to find gcc ?
+# TODO: why is gxx needed in addition of compiler{cxx} ? Otherwise nvcc fails with 'gcc: no such file..' ?
 requirements:
   build:
     - python                                 # [build_platform != target_platform]
     - cross-python_{{ target_platform }}     # [build_platform != target_platform]
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
-    - gxx  # [linux]
+    - gxx                                    # [linux]
     - {{ compiler('cuda') }}                 # [cuda_compiler_version != "None"]
+    - cuda-nvrtc-dev                         # [(cuda_compiler_version or "").startswith("12")]
   host:
-    - cuda-nvrtc-dev      # [(cuda_compiler_version or "").startswith("12")]
     - pip
     - python
-    - ocl-icd  # [linux]
-    - khronos-opencl-icd-loader  # [win or osx]
-    - ocl_icd_wrapper_apple  # [osx]
+    - ocl-icd-system                        # [linux]
+    - khronos-opencl-icd-loader             # [win or osx]
+    - ocl_icd_wrapper_apple                 # [osx]
+    - cuda-version >={{ cuda_compiler_version }},<{{ cuda_major + 1 }}.0a0  # [cuda_compiler_version != "None"]
   run:
     - numpy
     - psutil
     - pyopencl
     - python
     - __cuda >={{ cuda_compiler_version }}  # [cuda_compiler_version != "None"]
+    - cuda-nvrtc                            # [(cuda_compiler_version or "").startswith("12")]
+    - cudatoolkit                           # [(cuda_compiler_version or "").startswith("11")]
   run_constrained:
-    - __cuda <0.0a0  # [cuda_compiler_version == "None"]
-    - cudatoolkit =={{ cuda_compiler_version }}  # [cuda_compiler_version in ('10.2', '11.0', '11.1')]
-    - cudatoolkit >={{ cuda_compiler_version }},<11.8  # [cuda_compiler_version == '11.2']
-    - cudatoolkit >={{ cuda_compiler_version }},<12  # [cuda_compiler_version == '11.8']
-    {% if cuda_major >=12 %}
-    - cudatoolkit >={{ cuda_compiler_version }},<{{ cuda_major + 1 }}.0a0
-    {% endif %}
+    - __cuda <0.0a0                         # [cuda_compiler_version == "None"]
 
 test:
   imports:
     - pyvkfft
+    - pyvkfft.base
+    - pyvkfft.test._test_opencl_lib
+    - pyvkfft.test._test_cuda_lib           # [cuda_compiler_version != "None"]
 #  commands:
 #    - pyvkfft-test --help
 
