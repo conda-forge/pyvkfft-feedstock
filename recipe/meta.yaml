@@ -1,5 +1,5 @@
 {% set name = "pyvkfft" %}
-{% set version = "2024.1.2" %}
+{% set version = "2024.1.4" %}
 {% if cuda_compiler_version is undefined %}
 {% set cuda_compiler_version = "None" %}
 {% endif %}
@@ -11,7 +11,7 @@ package:
 
 source:
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/pyvkfft-{{ version }}.tar.gz
-  sha256: a721e9d81198cdd89a5d8fec8526fb28f5384aec452624ea9b9148b2c796b1d9
+  sha256: feaf3dcc9b2f2ea556ff8b6d1157520d3faa8ba8326c694d4136c974f13ee191
   patches:
     - conda_libraries.diff
 
@@ -30,6 +30,7 @@ requirements:
     - python                                 # [build_platform != target_platform]
     - cross-python_{{ target_platform }}     # [build_platform != target_platform]
     - {{ compiler('c') }}
+    - {{ stdlib("c") }}
     - {{ compiler('cxx') }}
     - gxx                                    # [linux]
     - {{ compiler('cuda') }}                 # [cuda_compiler_version != "None"]
