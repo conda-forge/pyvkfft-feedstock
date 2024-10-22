@@ -43,6 +43,7 @@ requirements:
     - ocl_icd_wrapper_apple                 # [osx]
     - cuda-version >={{ cuda_compiler_version }},<{{ cuda_major + 1 }}.0a0  # [cuda_compiler_version != "None"]
     - cuda-nvrtc-dev                         # [(cuda_compiler_version or "").startswith("12")]
+    - setuptools
   run:
     - numpy
     - psutil
