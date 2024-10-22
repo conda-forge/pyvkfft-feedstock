@@ -16,7 +16,7 @@ source:
     - conda_libraries.diff
 
 build:
-  number: 0
+  number: 1
   entry_points:
     - pyvkfft-test = pyvkfft.scripts.pyvkfft_test:main
   script:
@@ -34,6 +34,7 @@ requirements:
     - {{ compiler('cxx') }}
     - gxx                                    # [linux]
     - {{ compiler('cuda') }}                 # [cuda_compiler_version != "None"]
+    - setuptools
   host:
     - pip
     - python
@@ -42,6 +43,7 @@ requirements:
     - ocl_icd_wrapper_apple                 # [osx]
     - cuda-version >={{ cuda_compiler_version }},<{{ cuda_major + 1 }}.0a0  # [cuda_compiler_version != "None"]
     - cuda-nvrtc-dev                         # [(cuda_compiler_version or "").startswith("12")]
+    - setuptools
   run:
     - numpy
     - psutil
