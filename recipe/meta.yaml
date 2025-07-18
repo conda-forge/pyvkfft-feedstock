@@ -1,5 +1,5 @@
 {% set name = "pyvkfft" %}
-{% set version = "2024.1.4" %}
+{% set version = "2025.1" %}
 {% if cuda_compiler_version is undefined %}
 {% set cuda_compiler_version = "None" %}
 {% endif %}
@@ -10,13 +10,13 @@ package:
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/pyvkfft-{{ version }}.tar.gz
-  sha256: feaf3dcc9b2f2ea556ff8b6d1157520d3faa8ba8326c694d4136c974f13ee191
+  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/pyvkfft-{{ version }}.tar.gz
+  sha256: c1be7a113c2d00b264223a72a6c032974313dd13cbe80e143a77948dff8c455a
   patches:
     - conda_libraries.diff
 
 build:
-  number: 1
+  number: 2
   entry_points:
     - pyvkfft-test = pyvkfft.scripts.pyvkfft_test:main
   script:
