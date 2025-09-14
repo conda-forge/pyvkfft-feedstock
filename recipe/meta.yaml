@@ -42,7 +42,7 @@ requirements:
     - khronos-opencl-icd-loader             # [win or osx]
     - ocl_icd_wrapper_apple                 # [osx]
     - cuda-version >={{ cuda_compiler_version }},<{{ cuda_major + 1 }}.0a0  # [cuda_compiler_version != "None"]
-    - cuda-nvrtc-dev                         # [(cuda_compiler_version or "").startswith("12")]
+    - cuda-nvrtc-dev                         # [not (cuda_compiler_version or "").startswith("11")]
     - setuptools
   run:
     - numpy
@@ -50,7 +50,7 @@ requirements:
     - pyopencl
     - python
     - __cuda >={{ cuda_compiler_version }}  # [cuda_compiler_version != "None"]
-    - cuda-nvrtc                            # [(cuda_compiler_version or "").startswith("12")]
+    - cuda-nvrtc                            # [not (cuda_compiler_version or "").startswith("11")]
     - cudatoolkit                           # [(cuda_compiler_version or "").startswith("11")]
   run_constrained:
     - __cuda <0.0a0                         # [cuda_compiler_version == "None"]
