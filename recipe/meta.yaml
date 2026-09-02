@@ -19,6 +19,11 @@ build:
   entry_points:
     - pyvkfft-test = pyvkfft.scripts.pyvkfft_test:main
   script:
+    # CUDA 13 moved the win-64 import libraries to Library/lib/x64 to support
+    # cross-compiling, cuda-nvcc's activate.bat sets INCLUDE but never LIB, unlike its
+    # activate.sh counterpart, so the host prefix is missing from the link path.
+    # https://github.com/conda-forge/cuda-nvcc-feedstock/issues/47
+    - set "LIB=%LIBRARY_LIB%\x64;%LIB%"      # [win and cuda_compiler_version != "None"]
     - {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
   ignore_run_exports_from:
     - cuda-nvrtc-dev                         # [cuda_compiler_version != "None"]
