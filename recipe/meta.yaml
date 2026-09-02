@@ -31,7 +31,7 @@ build:
     - cuda-version                           # [cuda_compiler_version != "None"]
   missing_dso_whitelist:
     # The CUDA driver must come from the system at runtime.
-    - "*/libcuda.so.1"                       # [cuda_compiler_version != "None"]
+    - "*/libcuda.so.1"                       # [linux and cuda_compiler_version != "None"]
     # ocl-icd-system symlinks the system's copy at runtime.
     - "*/libOpenCL.so.1"                     # [linux]
 
@@ -50,7 +50,7 @@ requirements:
     - ocl-icd-system                        # [linux]
     - khronos-opencl-icd-loader             # [win or osx]
     - ocl_icd_wrapper_apple                 # [osx]
-    - cuda-version ={{ cuda_compiler_version }}  # [cuda_compiler_version != "None"]
+    - cuda-version {{ cuda_compiler_version }}  # [cuda_compiler_version != "None"]
     - cuda-nvrtc-dev                        # [cuda_compiler_version != "None"]
     - setuptools
   run:
