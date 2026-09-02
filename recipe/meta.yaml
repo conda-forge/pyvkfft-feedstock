@@ -24,8 +24,12 @@ build:
     - cuda-nvrtc-dev                         # [cuda_compiler_version != "None"]
   ignore_run_exports:
     - cuda-version                           # [cuda_compiler_version != "None"]
+  missing_dso_whitelist:
+    # The CUDA driver must come from the system at runtime.
+    - "*/libcuda.so.1"                       # [cuda_compiler_version != "None"]
+    # ocl-icd-system symlinks the system's copy at runtime.
+    - "*/libOpenCL.so.1"                     # [linux]
 
-# TODO: why is gxx needed in addition of compiler{cxx} ? Otherwise nvcc fails with 'gcc: no such file..' ?
 requirements:
   build:
     - python                                 # [build_platform != target_platform]
