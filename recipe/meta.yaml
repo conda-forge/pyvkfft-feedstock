@@ -1,12 +1,8 @@
 {% set name = "pyvkfft" %}
 {% set version = "2025.1.1" %}
 
-# Context: The default context value "None" is used when cuda_compiler_version is not
-# defined in the matrix configuration (.ci_support/*.yaml files). When a matrix
-# file specifies cuda_compiler_version (e.g., "13.0"), that value takes precedence
-# over this default, allowing the same recipe to build with or without CUDA.
-context:
-  cuda_compiler_version: None
+# cuda_compiler_version is always defined by the CI matrix (.ci_support/*.yaml
+# files, either as a CUDA version or "None"), so it does not need to be set here.
 
 package:
   name: {{ name|lower }}
