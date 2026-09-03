@@ -1,8 +1,15 @@
 {% set name = "pyvkfft" %}
 {% set version = "2025.1.1" %}
-{% if cuda_compiler_version is undefined %}
-{% set cuda_compiler_version = "None" %}
-{% endif %}
+
+# Context: The default context value "None" is used when cuda_compiler_version is not
+# defined in the matrix configuration (.ci_support/*.yaml files). When a matrix
+# file specifies cuda_compiler_version (e.g., "13.0"), that value takes precedence
+# over this default, allowing the same recipe to build with or without CUDA.
+#
+# This design avoids conda-recipe-manager parsing errors from unsupported Jinja2
+# if-blocks (which previously checked: {% if cuda_compiler_version is undefined %}).
+# Now we rely on conda-build's implicit context handling where undefined variables
+# default to None, making the recipe compatible with future v1 recipe.yaml migration.
 
 package:
   name: {{ name|lower }}
