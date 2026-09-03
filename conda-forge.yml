@@ -1,5 +1,5 @@
-azure:
-  free_disk_space: true
+workflow_settings:
+  free_disk_space: quick
 build_platform:
   linux_ppc64le: linux_64
   osx_arm64: osx_64
